@@ -134,6 +134,14 @@ func Yyerror(format string, args ...interface{}) {
 	yyerrorl(lineno, format, args...)
 }
 
+func PrintWarn(fmt_ string, args ...interface{}) {
+	PrintWarnl(lineno, fmt_, args...)
+}
+
+func PrintWarnl(line int32, fmt_ string, args ...interface{}) {
+	fmt.Printf("%v: %s\n", linestr(line), fmt.Sprintf(fmt_, args...))
+}
+
 func Warn(fmt_ string, args ...interface{}) {
 	adderr(lineno, fmt_, args...)
 
@@ -327,7 +335,7 @@ func importdot(opkg *Pkg, pack *Node) {
 
 	if n == 0 {
 		// can't possibly be used - there were no symbols
-		yyerrorl(pack.Lineno, "imported and not used: %q", opkg.Path)
+		PrintWarnl(pack.Lineno, "imported and not used: %q", opkg.Path)
 	}
 }
 
