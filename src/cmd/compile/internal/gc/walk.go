@@ -50,10 +50,10 @@ func walk(fn *Node) {
 			if defn.Left.Name.Used() {
 				continue
 			}
-			yyerrorl(defn.Left.Pos, "%v declared and not used", ln.Sym)
+			PrintWarnl(defn.Left.Pos, "%v declared and not used", ln.Sym)
 			defn.Left.Name.SetUsed(true) // suppress repeats
 		} else {
-			yyerrorl(ln.Pos, "%v declared and not used", ln.Sym)
+			PrintWarnl(ln.Pos, "%v declared and not used", ln.Sym)
 		}
 	}
 
