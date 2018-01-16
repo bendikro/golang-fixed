@@ -12,6 +12,9 @@ import (
 	"cmd/go/internal/base"
 )
 
+
+const customVersion = "Custom build to turn errors into warnings"
+
 var CmdVersion = &base.Command{
 	Run:       runVersion,
 	UsageLine: "version",
@@ -24,5 +27,5 @@ func runVersion(cmd *base.Command, args []string) {
 		cmd.Usage()
 	}
 
-	fmt.Printf("go version %s %s/%s\n", runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("go version %s %s/%s (%s)\n", runtime.Version(), runtime.GOOS, runtime.GOARCH, customVersion)
 }
