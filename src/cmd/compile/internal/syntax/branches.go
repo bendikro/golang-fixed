@@ -44,9 +44,13 @@ func checkBranches(body *BlockStmt, errh ErrorHandler) {
 	for _, l := range ls.labels {
 		if !l.used {
 			l := l.lstmt.Label
-			ls.err(l.Pos(), "label %s defined and not used", l.Value)
+			PrintWarnl(l.Pos(), "label %s defined and not used", l.Value)
 		}
 	}
+}
+
+func PrintWarnl(pos src.Pos, fmt_ string, args ...interface{}) {
+	fmt.Printf("WARNING: %v: %s\n", pos, fmt.Sprintf(fmt_, args...))
 }
 
 type labelScope struct {
